@@ -1,15 +1,14 @@
-import { URL } from './api.js';
+import { fetchNews } from './api.js';
 import './news-article.js';
 
 window.addEventListener('load', () => {
-   await fetchNews();
+   renderNews();
 });
 
-async function fetchNews() {
-    const res = await fetch(URL);
-    const json = await res.json();
-    
+const renderNews = async () => {
     const main = document.querySelector('main');
+
+    const json = await fetchNews();
     
     json.articles.forEach(article => {
         const el = document.createElement('news-article');
